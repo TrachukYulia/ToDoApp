@@ -19,6 +19,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigurePersistence(builder.Configuration);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IToDoItemServices, ToDoItemServices>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 builder.Services.AddCors();
 
 builder.Services.AddSwaggerGen();
