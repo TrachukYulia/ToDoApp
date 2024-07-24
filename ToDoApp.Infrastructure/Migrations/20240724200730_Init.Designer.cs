@@ -12,7 +12,7 @@ using ToDoApp.Infrastructure.Data;
 namespace ToDoApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ToDoAppContext))]
-    [Migration("20240723001356_Init")]
+    [Migration("20240724200730_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -41,6 +41,23 @@ namespace ToDoApp.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "My Day"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Important"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Tasks"
+                        });
                 });
 
             modelBuilder.Entity("ToDoApp.Domain.Models.ToDoItem", b =>
@@ -55,10 +72,14 @@ namespace ToDoApp.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DueDate")
+                        .HasMaxLength(999)
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDone")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(999)
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .IsRequired()

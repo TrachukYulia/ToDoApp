@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ToDoApp.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -31,8 +33,8 @@ namespace ToDoApp.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(999)", maxLength: 999, nullable: false),
-                    IsDone = table.Column<bool>(type: "bit", nullable: false),
-                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDone = table.Column<bool>(type: "bit", maxLength: 999, nullable: false, defaultValue: false),
+                    DueDate = table.Column<DateTime>(type: "datetime2", maxLength: 999, nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -44,6 +46,16 @@ namespace ToDoApp.Infrastructure.Migrations
                         principalTable: "Category",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "My Day" },
+                    { 2, "Important" },
+                    { 3, "Tasks" }
                 });
 
             migrationBuilder.CreateIndex(

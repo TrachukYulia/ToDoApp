@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using ToDoApp.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.PortableExecutable;
 
 namespace ToDoApp.Infrastructure.Data
 {
@@ -20,10 +21,24 @@ namespace ToDoApp.Infrastructure.Data
     }
     public ToDoAppContext() : base() { }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-    }
-}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ToDoItem>()
+                .HasOne(fi => fi.Category)
+                .WithMany(f => f.ToDoItems)
+                .HasForeignKey(fi => fi.CategoryId);
+            DataSeed(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
+        private void DataSeed(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>().HasData(
+                new Category { Id = 1,Name = "My Day" },
+                new Category { Id = 2, Name = "Important" },
+                new Category { Id = 3, Name = "Tasks" }
+                );
+
+        }
+        }
 }
