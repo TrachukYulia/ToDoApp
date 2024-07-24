@@ -27,17 +27,18 @@ namespace ToDoApp.Infrastructure.Repositories
             var Type = typeof(TEntity).Name;
             if (!_repositories.ContainsKey(Type))
             {
-                var repositiryType = typeof(IBaseRepository<>);
+                var repositiryType = typeof(BaseRepository<>);
                 var repositoryInstance = Activator.CreateInstance(
                     repositiryType.MakeGenericType(typeof(TEntity)), _context);
                 _repositories.Add(Type, repositoryInstance);
             }
             return (IBaseRepository<TEntity>)_repositories[Type];
         }
-        public int Save()
+        public void Save()
         {
-            return _context.SaveChanges();
+            _context.SaveChanges();
         }
+
         public void Dispose()
         {
             _context.Dispose();

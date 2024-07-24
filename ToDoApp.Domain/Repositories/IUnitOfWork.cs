@@ -9,7 +9,7 @@ namespace ToDoApp.Domain.Repositories
 {
     public interface IUnitOfWork
     {
-        int Save();
+        void Save();
         IBaseRepository<T> GetRepository<T>() where T : BaseEntity;
     }
 }

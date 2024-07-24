@@ -20,6 +20,10 @@ namespace ToDoApp.Infrastructure.Data.EntityTypeConfiguration
              .HasForeignKey(x => x.CategoryId)
              .OnDelete(DeleteBehavior.Cascade);
             builder.Property(o => o.Name).IsRequired().HasMaxLength(999);
+            builder.Property(o => o.IsDone).HasDefaultValue(false).IsRequired().HasMaxLength(999);
+            builder.Property(o => o.DueDate).HasMaxLength(999);
+
+
 
         }
     }
