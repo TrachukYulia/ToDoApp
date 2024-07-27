@@ -21,7 +21,7 @@ namespace ToDoApp.Infrastructure.Data.EntityTypeConfiguration
              .OnDelete(DeleteBehavior.Cascade);
             builder.Property(o => o.Name).IsRequired().HasMaxLength(999);
             builder.Property(o => o.IsDone).HasDefaultValue(false).IsRequired().HasMaxLength(999);
-            builder.Property(o => o.DueDate).HasMaxLength(999);
+            builder.Property(o => o.DueDate).HasDefaultValue(DateTime.Now.Date).HasMaxLength(999);
 
 
 

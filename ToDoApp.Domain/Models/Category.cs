@@ -9,6 +9,8 @@ namespace ToDoApp.Domain.Models
     public class Category: BaseEntity
     {
        public string Name { get; set; }
+       public int Priority { get; set; }
+       public string Icon { get; set; } 
        public List<ToDoItem> ToDoItems { get; set; }   
     }
 }

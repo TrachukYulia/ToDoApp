@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoApp.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using ToDoApp.Infrastructure.Data;
 namespace ToDoApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ToDoAppContext))]
-    partial class ToDoAppContextModelSnapshot : ModelSnapshot
+    [Migration("20240726234629_ToDoApp")]
+    partial class ToDoApp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,10 +33,21 @@ namespace ToDoApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("list");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Priority")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(3);
 
                     b.HasKey("Id");
 
@@ -43,17 +57,37 @@ namespace ToDoApp.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "My Day"
+                            Icon = "wb_sunny",
+                            Name = "My Day",
+                            Priority = 1
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Important"
+                            Icon = "star",
+                            Name = "Important",
+                            Priority = 1
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Tasks"
+                            Icon = "task",
+                            Name = "Tasks",
+                            Priority = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Icon = "event",
+                            Name = "Planned",
+                            Priority = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Icon = "shopping_cart",
+                            Name = "Groceries",
+                            Priority = 2
                         });
                 });
 
@@ -69,8 +103,10 @@ namespace ToDoApp.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DueDate")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(999)
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 7, 27, 0, 0, 0, 0, DateTimeKind.Local));
 
                     b.Property<bool>("IsDone")
                         .ValueGeneratedOnAdd()
