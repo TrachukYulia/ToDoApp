@@ -1,0 +1,32 @@
+<div class="main-content">
+  <h1 class="main-title">My Day</h1>
+  <p class="description">Any tasks you didn’t complete in My Day last time show up in the suggestions pane.</p>
+  
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let task of tasks">
+      <div class="task-content">
+        <input class="form-check-input" type="checkbox" [id]="task.id">
+        <label class="form-check-label" [for]="task.id">{{task.name}}</label>
+        <div class="task-due-date">
+          <mat-icon class="calendar-icon">calendar_today</mat-icon>
+          {{task.dueDate}}
+        </div>
+      </div>
+      <div class="task-actions">
+        <!-- <mat-icon class="edit-icon" (click)="editTask(task)">edit</mat-icon>
+        <mat-icon class="delete-icon" (click)="deleteTask(task)">delete</mat-icon> -->
+        <mat-icon class="edit-icon">edit</mat-icon>
+        <mat-icon class="delete-icon">delete</mat-icon>
+      </div>
+    </li>
+  </ul>
+  
+  <mat-paginator #paginator
+                 class="pagination"
+                 (page)="handlePageEvent($event)"
+                 [pageIndex]="pageIndex"
+                 [pageSize]="pageSize"
+                 [length]="length"
+                 aria-label="Select page">
+  </mat-paginator>
+</div>

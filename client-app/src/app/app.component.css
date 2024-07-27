@@ -1,0 +1,76 @@
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  overflow: hidden; /* Prevent scrolling */
+  flex-direction: column;
+}
+
+/* Navbar */
+app-navbar {
+  flex: 0 0 auto;
+}
+
+/* Sidenav Container */
+.sidenav-container {
+  flex: 1;
+  display: flex;
+  height: calc(100% - 64px);
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 250px;
+  background-color: #2a2a2a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.app-sidebar {
+  flex: 1;
+  overflow: auto;
+}
+
+/* Sidenav Content */
+.sidenav-content {
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1a1a; /* Main content background color */
+  color: white;
+}
+::ng-deep .main-content {
+  height: 500px !important;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main Content */
+app-main-content {
+  display:block;
+  flex: 1; 
+  padding: 1em 1em 0em 1em; 
+  /* height: calc(100% - 80px);  */
+  box-sizing: border-box;
+}
+
+/* Footer Styles */
+app-footer {
+  background-color: #1a1a1a; /* Footer background color */
+  padding: 0em 1em 0em 1em; /* Adjust padding as needed */
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-shrink: 0; /* Prevent footer from shrinking */
+}
