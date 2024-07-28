@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, EventEmitter, NgModule, OnInit, Output } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { Category } from '../../components/models/category/category.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -42,9 +43,16 @@ export class SidebarComponent implements OnInit{
   // ];
   mainMenuItems: any[] = [];
   otherMenuItems: any[] = [];
+  @Output() categorySelected = new EventEmitter<Category>();
 
   constructor( private _categoryService: CategoryService,) {}
+  selectCategory(category: Category): void {
+    this.categorySelected.emit(category);
+    console.log("Selected category", category)
+  }
 
+  addCategory(name: string): void {
+  }
   ngOnInit(): void {
     this._categoryService.getCategory().subscribe(categories => {
       this.mainMenuItems = categories.filter((category: { priority: any; }) => category.priority === 1);

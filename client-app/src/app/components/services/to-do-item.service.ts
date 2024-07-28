@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ToDoItem } from '../models/to-do-item/to-do-item.model';
 import { HttpClient } from '@angular/common/http';
+import { Category } from '../models/category/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ import { HttpClient } from '@angular/common/http';
 export class ToDoItemService {
 
   FormData!: ToDoItem;
+  private categories: Category[] = [];
+  private tasks: ToDoItem[] = [];
   
   constructor(private http: HttpClient) {
   

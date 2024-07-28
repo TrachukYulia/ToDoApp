@@ -13,5 +13,7 @@ namespace ToDoApp.Application.DTO
         public bool IsDone { get; set; }
         public DateTime DueDate { get; set; }
         public Category Category { get; set; }
+        public int CategoryId { get; set; }
+
     }
 }

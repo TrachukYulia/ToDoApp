@@ -3,4 +3,5 @@ export interface ToDoItem {
     Name: string;
     dueDate: Date,
     isDone: boolean, 
+    categoryId: number
 }

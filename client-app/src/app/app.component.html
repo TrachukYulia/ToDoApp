@@ -1,7 +1,9 @@
 <app-navbar></app-navbar>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav mode="side" opened class="sidebar">
-    <app-sidebar></app-sidebar>
+    <app-sidebar
+      (categorySelected)="onCategorySelected($event)">
+    </app-sidebar>
   </mat-sidenav>
   
   <mat-sidenav-content class="sidenav-content">

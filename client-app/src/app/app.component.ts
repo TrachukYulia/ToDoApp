@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './core/footer/footer.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CategoryService } from './components/services/category.service';
+import { Category } from './components/models/category/category.model';
+import { TaskService } from './components/services/task.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -36,4 +38,10 @@ import { CategoryService } from './components/services/category.service';
 })
 export class AppComponent {
   title = 'client-app';
+  constructor(private _taskService: TaskService) {}
+
+  onCategorySelected(category: Category) {
+    this._taskService.filterTasksByCategory(category.id);
+    console.log('Category selected:', category);
+  }
 }
