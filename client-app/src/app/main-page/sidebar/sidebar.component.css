@@ -1,6 +1,6 @@
 .mat-list-item {
   display: flex;
-  padding: 0 16px;
+  padding: 0 0px;
   height: 48px;
 }
 
@@ -8,6 +8,8 @@
   display: flex;
   align-items: center;
   width: 100%;
+  padding: 0px;
+  margin: 0px;
 }
 
 .menu-item-container {
@@ -37,7 +39,7 @@
   color: rgb(212, 212, 212);
 }
 
-.mat-divider {
+.divider {
   border-top-color: rgba(111, 111, 111, 0.386);
   border-width: 3px;
 }
@@ -64,7 +66,7 @@
 }
 
 .input-box {
-  width: 200px;
+  width: 250px;
   margin-left: 5px;
   margin-right: 10px;
   display: flex;
@@ -76,7 +78,7 @@
 }
 .add-category {
   width: 100%;
-}
+  padding: 0px 15px 0px 5px;}
 
 .input-box .mat-form-field-wrapper {
   padding: 0 14px;
@@ -91,4 +93,54 @@
   justify-content: flex-end;
   align-items: flex-end;
   padding: 10px;
+}
+.search-bar-wrapper {
+  width: 100%; 
+  padding: 0 16px;
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+
+.search-bar-design {
+  width: 90%; 
+  padding: 0;
+  margin: 0px;
+}
+.search-bar-design input {
+  color: #ffffff !important; 
+}
+
+.search-bar-design input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important; 
+}
+
+.search-bar-design .mat-icon {
+  color: rgba(255, 255, 255, 0.7) !important; 
+}
+
+.search-bar-design .mat-form-field-label {
+  left: 0;
+  position: absolute; 
+  transform: translateX(8px); 
+  color: rgba(255, 255, 255, 0.7) !important; 
+}
+
+/* Custom scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  width: 8px; 
+  margin-left: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #333; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555; 
+  border-radius: 3px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
 }
