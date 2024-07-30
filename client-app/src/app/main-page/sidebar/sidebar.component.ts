@@ -9,11 +9,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Category } from '../../components/models/category/category.model';
+import { CategoryRequestModel } from '../../components/models/category/category-request.model';
+import { FormsModule } from '@angular/forms';
+import { TaskService } from '../../components/services/task.service';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [
+  imports:[
     MatListModule,
     MatIconModule,
     MatButtonModule,
@@ -21,42 +24,44 @@ import { Category } from '../../components/models/category/category.model';
     RouterLink,
     HttpClientModule,
     MatInputModule, 
-    MatFormFieldModule
+    MatFormFieldModule,
+    FormsModule
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent implements OnInit{
-  // mainMenuItems = [
-  //   {name: 'My Day', icon: 'wb_sunny'},
-  //   {name: 'Important', icon: 'star'},
-  //   {name: 'Planned', icon: 'event'},
-  //   {name: 'Assigned to me', icon: 'assignment_ind'},
-  //   {name: 'Tasks', icon: 'task'}
-  // ];
-
-  // otherMenuItems = [
-  //   {name: 'Getting started', icon: 'play_circle_filled'},
-  //   {name: 'Groceries', icon: 'shopping_cart'},
-  //   {name: 'Routine', icon: 'repeat'},
-  //   {name: 'Untitled list', icon: 'list'}
-  // ];
+  newCategoryName: string = ''
   mainMenuItems: any[] = [];
   otherMenuItems: any[] = [];
   @Output() categorySelected = new EventEmitter<Category>();
 
-  constructor( private _categoryService: CategoryService,) {}
+  constructor( private _categoryService: CategoryService, private _taskService: TaskService) {}
   selectCategory(category: Category): void {
-    this.categorySelected.emit(category);
-    console.log("Selected category", category)
+    this._taskService.setSelectedCategory(category); 
   }
-
-  addCategory(name: string): void {
-  }
-  ngOnInit(): void {
+  getListOfCategory(): void{
     this._categoryService.getCategory().subscribe(categories => {
       this.mainMenuItems = categories.filter((category: { priority: any; }) => category.priority === 1);
       this.otherMenuItems = categories.filter((category: { priority: any; }) => category.priority > 1);
+      if (this.mainMenuItems.length > 0) {
+        this.selectCategory(this.mainMenuItems[0]);
+      }
     });
+    
+  }
+  addCategory(): void {
+    if (this.newCategoryName) {
+      const newCategory: CategoryRequestModel = {
+        Name: this.newCategoryName,
+      };
+      this._categoryService.addCategory(newCategory).subscribe(() => {
+        this.newCategoryName = '';
+        this.getListOfCategory();  
+      });
+    }
+  }
+  ngOnInit(): void {    
+    this.getListOfCategory();
   }
 }
