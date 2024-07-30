@@ -1,0 +1,12 @@
+<footer class="footer">
+  <div class="footer-container">
+    <div class="add-task-container">
+      <mat-form-field class="full-width custom-placeholder">
+        <mat-icon matPrefix>add</mat-icon>
+        <mat-label>Add a task</mat-label>
+        <input matInput [(ngModel)]="newTaskName" (keyup.enter)="addTask()">
+      </mat-form-field>
+    </div>
+  </div>
+  
+</footer>

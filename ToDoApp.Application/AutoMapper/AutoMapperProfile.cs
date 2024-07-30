@@ -15,8 +15,10 @@ namespace ToDoApp.Application.AutoMapper
         {
             CreateMap<ToDoItem, ToDoItemRequest>()
                 .ReverseMap();
-            CreateMap<ToDoItem, ToDoItemResponse>()
+            CreateMap<ToDoItem, ToDoItemUpdate>()
                .ReverseMap();
+            CreateMap<ToDoItem, ToDoItemResponse>()
+              .ReverseMap();
 
             CreateMap<Category, CategoryRequest>()
                 .ReverseMap();

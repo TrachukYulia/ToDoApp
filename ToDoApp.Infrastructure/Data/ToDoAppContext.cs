@@ -34,9 +34,11 @@ namespace ToDoApp.Infrastructure.Data
         private void DataSeed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1,Name = "My Day" },
-                new Category { Id = 2, Name = "Important" },
-                new Category { Id = 3, Name = "Tasks" }
+                new Category { Id = 1,Name = "My Day", Priority = 1, Icon = "wb_sunny" },
+                new Category { Id = 2, Name = "Important", Priority = 1, Icon = "star" },
+                new Category { Id = 3, Name = "Tasks", Priority = 1, Icon = "task" },
+                new Category { Id = 4, Name = "Planned", Priority = 2, Icon = "event" },
+                new Category { Id = 5, Name = "Groceries", Priority = 2, Icon = "shopping_cart" }
                 );
 
         }

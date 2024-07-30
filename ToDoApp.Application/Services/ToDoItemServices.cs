@@ -62,11 +62,12 @@ namespace ToDoApp.Application.Services
             return _mapper.Map<IEnumerable<ToDoItemResponse>>(toDoItems);
         }
 
-        public void Update(ToDoItemRequest toDoItemRequest, int id)
+        public void Update(ToDoItemUpdate toDoItemRequest, int id)
         {
-
-            var toDoItem = _unitOfWork.GetRepository<ToDoItem>().Get(id);
-
+            
+             var toDoItem = _unitOfWork.GetRepository<ToDoItem>().Get(id);
+            if (toDoItemRequest.DueDate == null)
+                toDoItemRequest.DueDate = toDoItem.DueDate;
             if (toDoItem == null)
             {
                 throw new NotFoundException(toDoItem);
