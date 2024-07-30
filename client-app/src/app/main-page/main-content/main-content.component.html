@@ -1,7 +1,8 @@
 <div class="main-content">
   <h1 class="main-title">{{ selectedCategoryName }}</h1>
-  <p class="description">Any tasks you didn’t complete in My Day last time show up in the suggestions pane.</p>
-
+  <p class="description" *ngIf="paginatedTasks.length === 0">
+    It looks like you don’t have any tasks yet. Start adding tasks to organize your day. 
+  </p>
   <ul class="list-group">
     <li *ngFor="let task  of paginatedTasks " class="list-group-item">
       <div class="task-content">

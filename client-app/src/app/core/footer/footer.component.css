@@ -21,7 +21,7 @@
 
   .mdc-text-field--filled:not(.mdc-text-field--disabled){
     background-color: #404040c0 !important;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1) ;
     border: 1px solid #444 !important;
     color: rgba(255, 255, 255, 0.6) !important;
   }

@@ -12,12 +12,12 @@ export class TaskService {
   private tasksSubject = new BehaviorSubject<ToDoItem[]>([]);
   tasks$ = this.tasksSubject.asObservable();
   private selectedCategoryId: number | null = null;
+
   private selectedCategorySubject = new BehaviorSubject<Category | null>(null);
   selectedCategory$ = this.selectedCategorySubject.asObservable();
 
   constructor(private http: HttpClient) {
     this.fetchTasks();
-    // Ініціалізація категорії за замовчуванням
     this.selectedCategory$.subscribe(category => {
       if (category) {
         this.filterTasksByCategory(category.id);
@@ -37,31 +37,10 @@ export class TaskService {
       })
     );
   }
-  getToDoItem(): Observable<any> {
-    return this.http.get('https://localhost:7085/api/ToDoItem');
-  }
-
   getById(id: number): Observable<any> {
     return this.http.get('https://localhost:7085/api/ToDoItem/' + id);
   }
 
-  // updateToDoItem(id: number, categoryData: any): Observable<any> {
-  //   return this.http.put('https://localhost:7085/api/ToDoItem/' + id, categoryData).pipe(
-  //     tap(updatedTask => {
-  //       // Check if updatedTask is not null
-  //       if (updatedTask) {
-  //         const tasks = this.tasksSubject.value;
-  //         const index = tasks.findIndex(task => task.id === id);
-  //         if (index !== -1) {
-  //           tasks[index] = updatedTask as any;
-  //           this.tasksSubject.next([...tasks]);
-  //         }
-  //       } else {
-  //         console.error('Received null task from API');
-  //       }
-  //     })
-  //   );
-  // }
   updateToDoItem(id: number, updatedTaskData: ToDoItem): Observable<ToDoItem> {
     return this.http.put<ToDoItem>(`https://localhost:7085/api/ToDoItem/${id}`, updatedTaskData).pipe(
       tap(updatedTask => {
@@ -80,7 +59,6 @@ export class TaskService {
   deleteToDoItem(id: number): Observable<any> {
     return this.http.delete('https://localhost:7085/api/ToDoItem/' + id).pipe(
       tap(() => {
-        // Update the tasks list after deletion
         const currentTasks = this.tasksSubject.value;
         const updatedTasks = currentTasks.filter(task => task.id !== id);
         this.tasksSubject.next(updatedTasks);

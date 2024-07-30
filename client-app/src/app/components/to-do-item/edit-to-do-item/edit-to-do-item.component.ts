@@ -13,6 +13,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 import { ToDoItem } from '../../models/to-do-item/to-do-item.model';
 import { Observable } from 'rxjs';
+import { SnackbarService } from '../../services/snackbar.service';
 @Component({
   selector: 'app-edit-to-do-item',
   standalone: true,
@@ -36,6 +37,7 @@ export class EditToDoItemComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _formBuilder: FormBuilder,
     private _taskService: TaskService,  
+    private _snackbarService: SnackbarService
   ) {
     console.log('Received data:', data);
   }
@@ -57,9 +59,11 @@ export class EditToDoItemComponent implements OnInit {
       this._taskService.updateToDoItem(this.data.id, updatedTaskData).subscribe({
         next: (val: any) => {
           console.log('Update!', val); 
+          this._snackbarService.openSnackBar('Task updated successfully!');
           this.dialogRef.close(true);
         },
         error: (err: any) => {
+          this._snackbarService.openSnackBar('Failed to update task.');
           console.error(err);
         }
       });
