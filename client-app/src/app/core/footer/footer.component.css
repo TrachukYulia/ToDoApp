@@ -1,9 +1,12 @@
 .footer {
     width: 100%;
-    height: 100px;
-    background-color: rgb(48, 48, 48);
-    padding: 10px 0px 30px 10px;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    height: 80px;
+    /* background-color: #2a2a2a; */
+    /* padding: 10px 0px 30px 10px; */
+    /* box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #444; */
+    margin-bottom: 0.5em;
+    padding: 1em;
     }
 
   .input-box{
@@ -12,11 +15,18 @@
   .mat-label {
     color:aliceblue;
   }
+  .custom-placeholder input.mat-input-element {
+    color: white;
+  }
+
   .mdc-text-field--filled:not(.mdc-text-field--disabled){
-    background-color: rgb(90, 90, 90) !important;
+    background-color: #404040c0 !important;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid #444 !important;
+    color: rgba(255, 255, 255, 0.6) !important;
   }
   .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-floating-label, .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-floating-label--float-above {
-    color: rgb(255 255 255 / 60%) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
 }
   .add-task button {
     margin: 30px 0px 0px 0px;
@@ -24,4 +34,9 @@
     color: white;
     border: none;
     cursor: pointer;
+  }
+
+  .mat-mdc-form-field {
+    width: 100%;
+
   }

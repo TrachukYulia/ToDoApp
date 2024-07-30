@@ -1,0 +1,30 @@
+<div mat-dialog-content class="content-form-container">
+    <div class="modal-header">
+      <h1 class="modal-title fs-4" id="modalLabel">Edit Task</h1>
+    </div>
+    <form [formGroup]="editTaskForm" (ngSubmit)="onFormSubmit()">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field custom-form-field">
+            <mat-label class="custom-mat-label">Name of Task</mat-label>
+            <input matInput type="text" formControlName="name" required class="custom-input">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field custom-form-field">
+            <mat-label class="custom-mat-label">Due Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dueDate" class="custom-input">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="form-row form-footer">
+          <div class="button-wrapper">
+            <button mat-flat-button class="close-button" [mat-dialog-close]>Close</button>
+          </div>
+          <div class="button-wrapper">
+            <button mat-raised-button class="submit-button" type="submit">Save changes</button>
+          </div>
+        </div>
+      </form>      
+  </div>
+  

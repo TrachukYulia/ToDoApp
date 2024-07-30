@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgModule, OnInit, ViewChild } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,73 +7,131 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatPaginator, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../components/services/category.service';
-import { ToDoItemService } from '../../components/services/to-do-item.service';
 import { Category } from '../../components/models/category/category.model';
 import { TaskService } from '../../components/services/task.service';
+import { FormsModule } from '@angular/forms';
+import { EditToDoItemComponent } from '../../components/to-do-item/edit-to-do-item/edit-to-do-item.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ToDoItem } from '../../components/models/to-do-item/to-do-item.model';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main-content',
   standalone: true,
   imports: [MatListModule,
+    FormsModule,
     MatIconModule,
     MatButtonModule,
     MatInputModule, 
     MatFormFieldModule,
     MatPaginator,
     MatPaginatorModule,
-    CommonModule
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.css'
 })
 export class MainContentComponent implements OnInit{
   tasks: any[] = [];
+  tasks$: Observable<ToDoItem[]> | undefined;
   category: any[] =[];
   selectedCategoryId: number = 1;
+  selectedCategoryName: string = '';
   //paginator
-  pageIndex = 0;
-  pageSize = 10;
-  length = 10;
-  hidePageSize = true;
-  showPageSizeOptions = false;
-  showFirstLastButtons = true;
-  disabled = false;
-  pageEvent: PageEvent | undefined;
+  paginatedTasks: any[] = [];
+  pageSize: number = 5;
+  pageSizeOptions: number[] = [5, 10, 15];
+  pageIndex: number = 0;
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
-  constructor( private _categoryService: CategoryService,
-               private _todoItemService: ToDoItemService,
-               private _taskService: TaskService
+  constructor( public dialog: MatDialog,
+               private _categoryService: CategoryService,
+               private _taskService: TaskService,
+               private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    console.log("hello");
-    this.getCategory();
-    }
-  
-  getTodoItems(): void{
-    this._taskService.tasks$.subscribe(task => {
-      this.tasks = task;
-      console.log('Items is get', this.tasks)
+    this._taskService.tasks$.subscribe(tasks => {
+      this.tasks = tasks;
+      this.updatePaginatedTasks();
+      this.cdr.detectChanges(); 
     });
-  
+    const initialCategoryId = this.selectedCategoryId;
+    if (initialCategoryId !== null) {
+      this._taskService.filterTasksByCategory(initialCategoryId); 
+    }
+    this._taskService.selectedCategory$.subscribe(category => {
+      if (category) {
+        this.selectedCategoryId = category.id;
+        this._taskService.filterTasksByCategory(category.id); 
+      }
+    });
   }
-  getCategory():void{
+
+  toggleTaskCompletion(task: any) {
+    this.tasks$ = this._taskService.tasks$; 
+    task.isDone = !task.isDone;
+  }
+
+  updatePaginatedTasks() {
+    const startIndex = this.pageIndex * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedTasks = this.tasks.slice(startIndex, endIndex);
+  }
+
+  getTodoItems(): void {
+    this._taskService.tasks$.subscribe(tasks => {
+      this.tasks = tasks;
+      this.selectedCategoryName = this.category
+        .filter(category => category.id === this.selectedCategoryId)
+        .map(category => category.name)[0];
+      this.updatePaginatedTasks(); 
+      console.log('Items is get', this.tasks);
+    });
+  }
+  
+  getCategory(): void {
     this._categoryService.getCategory().subscribe(category => {
       this.category = category;
-      console.log('Categories is get', this.category)
+      console.log('Categories is get', this.category);
       this.getTodoItems();
     });
   }
 
-  
-
-  filterTasks(category: Category) {
-    this.selectedCategoryId = category.id;
-    this._taskService.filterTasksByCategory(this.selectedCategoryId);
-    console.log("Try to filter,selectedCategoryId ", this.selectedCategoryId)
+  handlePageEvent(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
+    this.updatePaginatedTasks();
   }
-  handlePageEvent(e: PageEvent) {
-    this.pageEvent = e;
-    this.pageIndex = e.pageIndex;
+
+  editTask(task: any) {
+    console.log(task)
+    const dialogRef = this.dialog.open(EditToDoItemComponent, {
+      data: { id: task.id, name: task.name, date: task.dueDate, isDone: task.isDone},
+    });
+    dialogRef.afterClosed().subscribe({
+    next: (val) =>{
+      console.log("val", val)
+      if(val) {
+        if (this.selectedCategoryId !== null) {
+          this._taskService.filterTasksByCategory(this.selectedCategoryId);
+        }
+      }
+    }
+   })
+  }
+  deleteTask(task: ToDoItem): void {
+    if (confirm(`Are you sure you want to delete the task "${task.name}"?`)) {
+      this._taskService.deleteToDoItem(task.id).subscribe({
+        next: () => {
+          console.log('Task deleted successfully');
+        },
+        error: (err) => {
+          console.error('Error deleting task:', err);
+        }
+      });
+    }
   }
 }

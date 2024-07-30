@@ -14,9 +14,6 @@
 // hue. Available color palettes: https://material.io/design/color/
 $client-app-primary: mat.define-palette(mat.$indigo-palette);
 $client-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-$primary: mat.define-palette(mat.$indigo-palette);
-$accent:  mat.define-palette(mat.$pink-palette, A200, A100, A400);
-$warn:  mat.define-palette(mat.$red-palette);
 // The warn palette is optional (defaults to red).
 $client-app-warn: mat.define-palette(mat.$red-palette);
 
@@ -65,7 +62,6 @@ $client-app-theme: mat.define-light-theme((
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($client-app-theme);
-
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;  }

@@ -12,7 +12,7 @@ namespace ToDoApp.Application.Interfaces
         IEnumerable<ToDoItemResponse> GetAll();
         void Create(ToDoItemRequest toDoItemRequest);
         ToDoItemResponse Get(int id);
-        void Update(ToDoItemRequest toDoItemRequest, int id);
+        void Update(ToDoItemUpdate toDoItemRequest, int id);
         void Delete(int id);
     }
 }

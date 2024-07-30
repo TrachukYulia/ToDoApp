@@ -42,7 +42,7 @@ namespace ToDoApp.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateToDoItem(int id, [FromBody] ToDoItemRequest toDoItemRequest)
+        public ActionResult UpdateToDoItem(int id, [FromBody] ToDoItemUpdate toDoItemRequest)
         {
             _toDoItemServices.Update(toDoItemRequest, id);
 

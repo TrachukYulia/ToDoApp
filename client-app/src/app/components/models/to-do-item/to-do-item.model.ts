@@ -1,6 +1,6 @@
 export interface ToDoItem {
     id: number;
-    Name: string;
+    name: string;
     dueDate: Date,
     isDone: boolean, 
     categoryId: number

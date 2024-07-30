@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {  } from '@angular/platform-browser';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -13,8 +11,7 @@ import { SidebarComponent } from "./main-page/sidebar/sidebar.component";
 import { MainContentComponent } from './main-page/main-content/main-content.component';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './core/footer/footer.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { CategoryService } from './components/services/category.service';
+import { HttpClientModule } from '@angular/common/http';
 import { Category } from './components/models/category/category.model';
 import { TaskService } from './components/services/task.service';
 @Component({
@@ -32,7 +29,10 @@ import { TaskService } from './components/services/task.service';
     MatInputModule,
     MatFormFieldModule,
     FooterComponent,
-    HttpClientModule],
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -24,7 +24,6 @@ app-navbar {
 .sidebar {
   width: 250px;
   background-color: #2a2a2a;
-  color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -34,7 +33,6 @@ app-navbar {
   flex: 1;
   overflow: auto;
 }
-
 /* Sidenav Content */
 .sidenav-content {
   overflow: hidden;
@@ -42,7 +40,7 @@ app-navbar {
   display: flex;
   flex-direction: column;
   background-color: #1a1a1a; /* Main content background color */
-  color: white;
+  color: awhite;
 }
 ::ng-deep .main-content {
   height: 500px !important;
