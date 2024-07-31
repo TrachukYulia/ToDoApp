@@ -127,7 +127,7 @@
 
 /* Custom scrollbar for WebKit browsers */
 ::-webkit-scrollbar {
-  width: 8px; 
+  width: 6px; 
   margin-left: 5px;
 }
 

@@ -43,7 +43,7 @@ app-navbar {
   background-color: #1a1a1a; 
 }
 ::ng-deep .main-content {
-  height: 517px !important;
+  height: 523px !important;
 }
 /* Content Wrapper */
 .content-wrapper {
