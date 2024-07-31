@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToDoItem } from '../../components/models/to-do-item/to-do-item.model';
 import { Observable, Subscription } from 'rxjs';
 import { SnackbarService } from '../../components/services/snackbar.service';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-main-content',
@@ -29,6 +30,7 @@ import { SnackbarService } from '../../components/services/snackbar.service';
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatExpansionModule  
   ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.css'
@@ -36,10 +38,11 @@ import { SnackbarService } from '../../components/services/snackbar.service';
 export class MainContentComponent implements OnInit{
   tasks: any[] = [];
   tasks$: Observable<ToDoItem[]> | undefined;
+  completedTasks: any[] = [];
   category: any[] =[];
   selectedCategoryId: number = 1;
   selectedCategoryName: string = '';
-  private deletedTask: ToDoItem | null = null;
+  expandedCompletedTasks: boolean = false;
 
   //paginator
   paginatedTasks: any[] = [];
@@ -59,6 +62,8 @@ export class MainContentComponent implements OnInit{
     this.getCategory()
     this._taskService.tasks$.subscribe(tasks => {
       this.tasks = tasks;
+      this.tasks = tasks.filter(task => !task.isDone);
+      this.completedTasks = tasks.filter(task => task.isDone);
       this.updatePaginatedTasks();
       this.cdr.detectChanges(); 
     });
@@ -71,9 +76,18 @@ export class MainContentComponent implements OnInit{
       }
     });
   }
-  toggleTaskCompletion(task: any) {
-    this.tasks$ = this._taskService.tasks$; 
+  toggleTaskCompletion(task: ToDoItem): void {
     task.isDone = !task.isDone;
+    this._taskService.updateToDoItem(task.id, task).subscribe(() => {
+      this.getTasks(); // Перезагружаем задачи после обновления
+    });
+  }
+  getTasks(): void {
+    this._taskService.tasks$.subscribe(tasks => {
+      this.tasks = tasks.filter(task => !task.isDone);
+      this.completedTasks = tasks.filter(task => task.isDone);
+      this.updatePaginatedTasks();
+    });
   }
   updatePaginatedTasks() {
     const startIndex = this.pageIndex * this.pageSize;
@@ -102,7 +116,17 @@ export class MainContentComponent implements OnInit{
     this.pageIndex = event.pageIndex;
     this.updatePaginatedTasks();
   }
-
+ 
+  expandCompletedTasks() {
+    this.expandedCompletedTasks = true;
+    this.updatePaginatedTasks();
+  }
+  
+  collapseCompletedTasks() {
+    this.expandedCompletedTasks = false;
+    this.updatePaginatedTasks();
+  }
+  
   editTask(task: any) {
     console.log(task)
     const dialogRef = this.dialog.open(EditToDoItemComponent, {

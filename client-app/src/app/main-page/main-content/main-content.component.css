@@ -1,3 +1,4 @@
+/* General Styles */
 body, html {
   margin: 0;
   padding: 0;
@@ -8,79 +9,92 @@ body, html {
   background-color: #1a1a1a;
 }
 
+/* Main Content */
 .main-content {
   flex: 1;
-  padding: 1em;
+  padding: 0.5em; 
   display: flex;
   flex-direction: column;
-  height: 100%;
-  background-color: #1a1a1a; 
+  height: calc(100% - 80px);
+  background-color: #1a1a1a;
+  overflow: hidden; 
 }
 
+/* Main Title */
 .main-title {
-  color: #ffcccb; /* Matches the color of the 'Important' text */
-  font-size: 2em;
+  color: #ffcccb;
+  font-size: 1.5em; 
 }
 
+/* Description */
 .description {
-  color: #ccc; /* Lighter color for the description text */
-  margin-bottom: 1em;
+  color: #ccc;
+  margin-bottom: 0.5em; 
 }
 
-.list-group {
+/* Task List Groups */
+.list-group, .completed-list-group {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: auto; 
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.list-group-item {
+/* Task List Item */
+.list-group-item, .completed-list-group-item {
   background-color: #2a2a2a;
   color: #fff;
   border: 1px solid #444;
-  margin-bottom: 0.5em;
-  padding: 1em;
+  margin-bottom: 0.4em;
+  padding: 0.5em; 
   display: flex;
   align-items: center;
   justify-content: space-between;
   transition: background-color 0.3s ease;
+  font-size: 0.9em; 
 }
 
-.list-group-item:hover {
+/* Hover Effect */
+.list-group-item:hover, .completed-list-group-item:hover {
   background-color: #333;
 }
 
+/* Form Check Input */
 .form-check-input {
-  margin-right: 1em;
+  margin-right: 0.5em; 
 }
 
+/* Form Check Label */
 .form-check-label {
   flex: 1;
 }
 
+/* Task Due Date */
 .task-due-date {
   color: #999;
-  font-size: 0.9em;
+  font-size: 0.8em; 
   display: flex;
   align-items: center;
-  margin-top: 0.5em;
+  margin-top: 0.3em; 
 }
 
+/* Calendar Icon */
 .calendar-icon {
   margin-left: 2px;
-  font-size: 15px;
+  font-size: 13px; 
 }
 
-
+/* Task Actions */
 .task-actions {
   display: flex;
-  gap: 0.5em;
+  gap: 0.4em; 
 }
 
+/* Task Action Icons */
 .task-actions mat-icon {
   cursor: pointer;
-  color: #ffcccb; /* Matches the color of the 'Important' text */
+  color: #ffcccb;
   transition: color 0.3s ease;
 }
 
@@ -88,8 +102,9 @@ body, html {
   color: #fff;
 }
 
+/* Pagination */
 .pagination {
-  margin-top: 1em;
+  margin-top: 0.8em; 
   display: flex;
   justify-content: center;
 }
@@ -100,9 +115,39 @@ mat-paginator {
 }
 
 mat-paginator .mat-button, mat-paginator .mat-icon-button {
-  color: #ffcccb; /* Matches the color of the 'Important' text */
+  color: #ffcccb;
 }
 
 mat-paginator .mat-form-field-label {
-  color: #ccc; /* Lighter color for the label */
+  color: #ccc;
+}
+
+/* Completed Task */
+.completed-task {
+  text-decoration: line-through;
+  color: gray;
+  opacity: 0.7;
+}
+
+/* Completed Tasks Panel */
+.completed-tasks-panel {
+  margin-top: 10px; 
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
+/* Completed Task Item */
+.completed-task-item {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* Expansion Panel Header */
+.mat-expansion-panel-header {
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  background-color: #1a1a1a;
 }

@@ -6,6 +6,7 @@ using ToDoApp.Application.Services;
 using ToDoApp.Domain.Repositories;
 using ToDoApp.Infrastructure.Data;
 using ToDoApp.Infrastructure.Repositories;
+using ToDoApp.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -38,7 +39,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
 }
+
+app.UseMiddleware<CustomExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
