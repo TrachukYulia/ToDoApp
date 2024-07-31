@@ -114,13 +114,7 @@ mat-paginator {
   color: #fff;
 }
 
-mat-paginator .mat-button, mat-paginator .mat-icon-button {
-  color: #ffcccb;
-}
 
-mat-paginator .mat-form-field-label {
-  color: #ccc;
-}
 
 /* Completed Task */
 .completed-task {
@@ -131,23 +125,54 @@ mat-paginator .mat-form-field-label {
 
 /* Completed Tasks Panel */
 .completed-tasks-panel {
-  margin-top: 10px; 
+  margin-top: 16px; 
   background-color: #2a2a2a;
   color: #ffffff;
 }
+.completed-tasks-container {
+  max-height: 200px; 
+  overflow-y: auto; 
+}
+.completed-list-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
-/* Completed Task Item */
-.completed-task-item {
+.completed-list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.completed-task-label {
   text-decoration: line-through;
-  color: gray;
+  color: gray; 
 }
-
-/* Expansion Panel Header */
-.mat-expansion-panel-header {
-  background-color: #2a2a2a;
-  color: #ffffff;
+/* Completed Task Item */
+.completed-task-label {
+  text-decoration: line-through; 
 }
-
-.mat-expansion-panel-header.mat-expanded {
-  background-color: #1a1a1a;
+.mat-expansion-panel-header .mat-expansion-panel-header-title {
+  color: #b9b9b9fb; 
+}
+::ng-deep .mat-expansion-panel-header .mat-icon {
+  color: #ffffff !important; 
+  font-size: 24px; 
+  transition: transform 0.3s ease; 
+}
+::ng-deep html
+{
+  --mat-expansion-header-indicator-color: rgb(255 255 255 / 54%) !important;
+  --mat-select-panel-background-color: white;
+  --mat-select-enabled-trigger-text-color: rgb(240 240 240 / 87%);
+  --mat-select-enabled-arrow-color: rgb(190 190 190 / 54%);
+  --mat-paginator-enabled-icon-color: rgb(195 195 195);
+  --mat-paginator-disabled-icon-color: rgb(255 255 255 / 23%);
+  --mdc-filled-text-field-input-text-color: rgb(253 253 253 / 87%);
+  --mat-form-field-state-layer-color: rgb(6 21 73 / 87%);
+}
+.mdc-text-field {
+background-color: #88888808;
 }

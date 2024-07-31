@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgModule, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, NgModule, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,7 +33,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatExpansionModule  
   ],
   templateUrl: './main-content.component.html',
-  styleUrl: './main-content.component.css'
+  styleUrl: './main-content.component.css',
 })
 export class MainContentComponent implements OnInit{
   tasks: any[] = [];
@@ -55,7 +55,7 @@ export class MainContentComponent implements OnInit{
                private _categoryService: CategoryService,
                private _taskService: TaskService,
                private cdr: ChangeDetectorRef,
-               private _snackbarService: SnackbarService
+               private _snackbarService: SnackbarService,
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +79,7 @@ export class MainContentComponent implements OnInit{
   toggleTaskCompletion(task: ToDoItem): void {
     task.isDone = !task.isDone;
     this._taskService.updateToDoItem(task.id, task).subscribe(() => {
-      this.getTasks(); // Перезагружаем задачи после обновления
+      this.getTasks(); 
     });
   }
   getTasks(): void {
@@ -96,12 +96,11 @@ export class MainContentComponent implements OnInit{
   }
   getTodoItems(): void {
     this._taskService.tasks$.subscribe(tasks => {
-      this.tasks = tasks;
+      this.tasks = tasks.filter(task => !task.isDone); 
       this.selectedCategoryName = this.category
         .filter(category => category.id === this.selectedCategoryId)
         .map(category => category.name)[0];
       this.updatePaginatedTasks(); 
-      console.log('Items is get', this.tasks);
     });
   }
   getCategory(): void {

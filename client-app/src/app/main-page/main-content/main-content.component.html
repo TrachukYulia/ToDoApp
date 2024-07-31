@@ -34,21 +34,23 @@
         Completed
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <ul class="completed-list-group">
-      <li *ngFor="let task of completedTasks" class="completed-list-group-item">
-        <div class="task-content">
-          <input class="form-check-input" type="checkbox" [checked]="task.isDone" (change)="toggleTaskCompletion(task)">
-          <label class="form-check-label">{{ task.name }}</label>
-          <div class="task-due-date">
-            <mat-icon class="calendar-icon">calendar_today</mat-icon>
-            {{ task.dueDate | date }}
+    <div class="completed-tasks-container">
+      <ul class="completed-list-group">
+        <li *ngFor="let task of completedTasks" class="completed-list-group-item">
+          <div class="task-content">
+            <input class="form-check-input" type="checkbox" [checked]="task.isDone" (change)="toggleTaskCompletion(task)">
+            <label class="form-check-label completed-task-label">{{ task.name }}</label>
+            <div class="task-due-date">
+              <mat-icon class="calendar-icon">calendar_today</mat-icon>
+              {{ task.dueDate | date }}
+            </div>
           </div>
-        </div>
-        <div class="task-actions">
-          <mat-icon class="edit-icon" (click)="editTask(task)">edit</mat-icon>
-          <mat-icon class="delete-icon" (click)="deleteTask(task)">delete</mat-icon>
-        </div>
-      </li>
-    </ul>
+          <div class="task-actions">
+            <mat-icon class="edit-icon" (click)="editTask(task)">edit</mat-icon>
+            <mat-icon class="delete-icon" (click)="deleteTask(task)">delete</mat-icon>
+          </div>
+        </li>
+      </ul>
+    </div>
   </mat-expansion-panel>
 </div>
