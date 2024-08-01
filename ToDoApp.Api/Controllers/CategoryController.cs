@@ -17,9 +17,9 @@ namespace ToDoApp.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CategoryResponse>> GetAll()
+        public ActionResult<IEnumerable<CategoryResponse>> GetAll([FromQuery] int userId)
         {
-            var categoryResponses = _categoryService.GetAll();
+            var categoryResponses = _categoryService.GetAll(userId);
             return Ok(categoryResponses);
         }
 

@@ -18,9 +18,6 @@ namespace ToDoApp.Infrastructure.Data.EntityTypeConfiguration
             builder.Property(o => o.Name).HasMaxLength(100).IsRequired();
             builder.Property(o => o.Icon).HasDefaultValue("list").IsRequired();
             builder.Property(o => o.Priority).HasDefaultValue(3).IsRequired();
-
-
-
         }
     }
 }

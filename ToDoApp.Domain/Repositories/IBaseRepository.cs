@@ -14,5 +14,6 @@ namespace ToDoApp.Domain.Repositories
         void Delete(T entity);
         T Get(int id);
         List<T> GetAll();
+
     }
 }

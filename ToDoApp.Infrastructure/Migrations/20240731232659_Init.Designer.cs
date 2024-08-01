@@ -12,8 +12,8 @@ using ToDoApp.Infrastructure.Data;
 namespace ToDoApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ToDoAppContext))]
-    [Migration("20240726234629_ToDoApp")]
-    partial class ToDoApp
+    [Migration("20240731232659_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,46 +49,14 @@ namespace ToDoApp.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(3);
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.HasIndex("UserId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Icon = "wb_sunny",
-                            Name = "My Day",
-                            Priority = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Icon = "star",
-                            Name = "Important",
-                            Priority = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Icon = "task",
-                            Name = "Tasks",
-                            Priority = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Icon = "event",
-                            Name = "Planned",
-                            Priority = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Icon = "shopping_cart",
-                            Name = "Groceries",
-                            Priority = 2
-                        });
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("ToDoApp.Domain.Models.ToDoItem", b =>
@@ -106,7 +74,7 @@ namespace ToDoApp.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(999)
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 7, 27, 0, 0, 0, 0, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2024, 8, 1, 0, 0, 0, 0, DateTimeKind.Local));
 
                     b.Property<bool>("IsDone")
                         .ValueGeneratedOnAdd()
@@ -119,11 +87,60 @@ namespace ToDoApp.Infrastructure.Migrations
                         .HasMaxLength(999)
                         .HasColumnType("nvarchar(999)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("ToDoItems");
+                });
+
+            modelBuilder.Entity("ToDoApp.Domain.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(999)
+                        .HasColumnType("nvarchar(999)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ToDoApp.Domain.Models.Category", b =>
+                {
+                    b.HasOne("ToDoApp.Domain.Models.User", "User")
+                        .WithMany("Categories")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ToDoApp.Domain.Models.ToDoItem", b =>
@@ -131,14 +148,29 @@ namespace ToDoApp.Infrastructure.Migrations
                     b.HasOne("ToDoApp.Domain.Models.Category", "Category")
                         .WithMany("ToDoItems")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ToDoApp.Domain.Models.User", "User")
+                        .WithMany("ToDoItems")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ToDoApp.Domain.Models.Category", b =>
                 {
+                    b.Navigation("ToDoItems");
+                });
+
+            modelBuilder.Entity("ToDoApp.Domain.Models.User", b =>
+                {
+                    b.Navigation("Categories");
+
                     b.Navigation("ToDoItems");
                 });
 #pragma warning restore 612, 618

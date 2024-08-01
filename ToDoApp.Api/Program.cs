@@ -7,6 +7,8 @@ using ToDoApp.Domain.Repositories;
 using ToDoApp.Infrastructure.Data;
 using ToDoApp.Infrastructure.Repositories;
 using ToDoApp.Api.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -20,9 +22,29 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigurePersistence(builder.Configuration);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IToDoItemServices, ToDoItemServices>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IJWTService, JWTService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddCors();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddSwaggerGen();
 
@@ -45,7 +67,7 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<CustomExceptionMiddleware>();
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

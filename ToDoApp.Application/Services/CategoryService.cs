@@ -53,9 +53,9 @@ namespace ToDoApp.Application.Services
             return _mapper.Map<CategoryResponse>(category);
         }
 
-        public IEnumerable<CategoryResponse> GetAll()
+        public IEnumerable<CategoryResponse> GetAll(int userId)
         {
-            var categories = _unitOfWork.GetRepository<Category>().GetAll();
+            var categories = _unitOfWork.CategoryRepository.GetAllByUser(userId);
             if (categories is null)
                 throw new NotFoundException(categories);
             return _mapper.Map<IEnumerable<CategoryResponse>>(categories);

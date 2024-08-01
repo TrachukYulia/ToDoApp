@@ -19,28 +19,29 @@ namespace ToDoApp.Infrastructure.Repositories
             dataContext = context;
         }
 
-        public void Create(T entity)
+        public  void Create(T entity)
         {
             dataContext.Add(entity);
         }
 
-        public void Update(T entity)
+        public  void Update(T entity)
         {
             dataContext.Update(entity);
         }
-        public void Delete(T entity)
+        public  void Delete(T entity)
         {
             dataContext.Set<T>().Remove(entity);
         }
 
-        public T Get(int id)
+        public  T Get(int id)
         {
             return dataContext.Set<T>().FirstOrDefault(x => x.Id == id);
         }
 
         public List<T> GetAll()
         {
-            return dataContext.Set<T>().ToList();
+            return dataContext.Set<T>()
+                 .ToList();
         }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ToDoApp.Application.DTO
 {
-    public class CategoryRequest
+    public class TokenDTO
     {
-        public string Name { get; set; }
-        public int UserId { get; set; }
+        public string Token { get; set; }
+        public string RefreshToken { get; set; }
     }
 }

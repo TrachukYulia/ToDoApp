@@ -9,7 +9,7 @@ namespace ToDoApp.Application.Interfaces
 {
     public interface ICategoryService
     {
-        IEnumerable<CategoryResponse> GetAll();
+        IEnumerable<CategoryResponse> GetAll(int userId);
         void Create(CategoryRequest categoryRequest);
         CategoryResponse Get(int id);
         void Update(CategoryRequest categoryRequest, int id);
