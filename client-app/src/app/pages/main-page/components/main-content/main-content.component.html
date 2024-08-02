@@ -1,0 +1,56 @@
+<div class="main-content">
+  <h1 class="main-title">{{ selectedCategoryName }}</h1>
+  <p class="description" *ngIf="paginatedTasks.length === 0">
+    It looks like you don’t have any tasks yet. Start adding tasks to organize your day.
+  </p>
+  <ul class="list-group">
+    <li *ngFor="let task of paginatedTasks" class="list-group-item" [class.completed-task]="task.isDone">
+      <div class="task-content">
+        <input class="form-check-input" type="checkbox" [checked]="task.isDone" (change)="toggleTaskCompletion(task)">
+        <label class="form-check-label">{{ task.name }}</label>
+        <div class="task-due-date">
+          <mat-icon class="calendar-icon">calendar_today</mat-icon>
+          {{ task.dueDate | date }}
+        </div>
+      </div>
+      <div class="task-actions">
+        <mat-icon class="edit-icon" (click)="editTask(task)">edit</mat-icon>
+        <mat-icon class="delete-icon" (click)="deleteTask(task)">delete</mat-icon>
+      </div>
+    </li>
+  </ul>
+  <mat-paginator #paginator
+                 class="pagination"
+                 [length]="tasks.length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="handlePageEvent($event)"
+                 aria-label="Select page">
+  </mat-paginator>
+
+  <mat-expansion-panel class="completed-tasks-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Completed
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="completed-tasks-container">
+      <ul class="completed-list-group">
+        <li *ngFor="let task of completedTasks" class="completed-list-group-item">
+          <div class="task-content">
+            <input class="form-check-input" type="checkbox" [checked]="task.isDone" (change)="toggleTaskCompletion(task)">
+            <label class="form-check-label completed-task-label">{{ task.name }}</label>
+            <div class="task-due-date">
+              <mat-icon class="calendar-icon">calendar_today</mat-icon>
+              {{ task.dueDate | date }}
+            </div>
+          </div>
+          <div class="task-actions">
+            <mat-icon class="edit-icon" (click)="editTask(task)">edit</mat-icon>
+            <mat-icon class="delete-icon" (click)="deleteTask(task)">delete</mat-icon>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </mat-expansion-panel>
+</div>

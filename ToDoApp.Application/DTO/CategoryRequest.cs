@@ -9,5 +9,6 @@ namespace ToDoApp.Application.DTO
     public class CategoryRequest
     {
         public string Name { get; set; }
+        public int UserId { get; set; }
     }
 }

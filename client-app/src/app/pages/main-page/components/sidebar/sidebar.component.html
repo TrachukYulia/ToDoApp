@@ -1,0 +1,41 @@
+<mat-nav-list class="sidenav-container" style="height: 100% !important;">
+  <div class="sidenav-content-wrapper">
+    <div class="menu-items">
+      <!-- Search Bar -->
+      <div class="search-bar-wrapper">
+        <mat-form-field class="search-bar search-bar-design">
+          <mat-icon matPrefix class="search-icon">search</mat-icon>
+          <input matInput placeholder="Search.." [(ngModel)]="searchQuery" (input)="filterCategories()" class="search-input">
+        </mat-form-field>
+      </div>
+      <div class="main-menu">
+        <a mat-list-item *ngFor="let item of filteredMainMenuItems" (click)="selectCategory(item)" class="menu-item">
+          <div class="menu-item-container">
+            <mat-icon class="icon">{{item.icon}}</mat-icon>
+            <span class="category light-text small-text">{{item.name}}</span>
+          </div>
+        </a>
+      </div>
+      <mat-divider class="divider"></mat-divider>
+      <div class="other-menu">
+        <a mat-list-item *ngFor="let item of filteredOtherMenuItems" (click)="selectCategory(item)" class="menu-item">
+          <div class="menu-item-container">
+            <mat-icon class="icon">{{item.icon}}</mat-icon>
+            <span class="category light-text small-text">{{item.name}}</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <div class="add-category">
+        <mat-form-field class="input-box">
+          <mat-icon matPrefix class="add-icon">add</mat-icon>
+          <mat-label class="light-text small-text">Add a category</mat-label>
+          <input matInput [(ngModel)]="newCategoryName" (keyup.enter)="addCategory()">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</mat-nav-list>

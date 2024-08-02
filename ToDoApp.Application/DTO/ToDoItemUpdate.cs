@@ -11,5 +11,6 @@ namespace ToDoApp.Application.DTO
         public string Name { get; set; }
         public bool IsDone { get; set; }
         public DateTime? DueDate { get; set; }
+
     }
 }

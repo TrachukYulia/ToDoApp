@@ -7,5 +7,9 @@ import { provideHttpClient } from '@angular/common/http';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes),provideHttpClient(), provideAnimationsAsync(), provideAnimationsAsync(), MatDatepickerModule]
+  providers: [provideRouter(routes),
+    provideHttpClient(),
+    provideAnimationsAsync(),
+    provideAnimationsAsync(),
+    MatDatepickerModule]
 };

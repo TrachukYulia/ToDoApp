@@ -14,5 +14,11 @@ namespace ToDoApp.Infrastructure.Repositories
         public CategoryRepository(ToDoAppContext context) : base(context)
         {
         }
+        public List<Category> GetAllByUser(int userId)
+        {
+            return dataContext.Category
+                .Where(t => t.UserId == userId)
+                .ToList();
+        }
     }
 }

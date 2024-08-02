@@ -9,5 +9,6 @@ namespace ToDoApp.Domain.Repositories
 {
     public interface ICategoryRepository: IBaseRepository<Category>
     {
+        public List<Category> GetAllByUser(int userId);
     }
 }

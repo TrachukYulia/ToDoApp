@@ -1,0 +1,147 @@
+.mat-list-item {
+  display: flex;
+  padding: 0 0px;
+  height: 48px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.menu-item-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.sidenav-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.category {
+  color: aliceblue;
+  margin-left: 8px;
+  flex-grow: 1;
+}
+
+.icon {
+  color: rgb(212, 212, 212);
+}
+
+.divider {
+  border: 2px;
+  color: aliceblue;
+  border-color: rgba(213, 213, 213, 0.386);
+  border-width: 3px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.mat-form-field-infix {
+  padding-left: 8px;
+}
+
+.mat-icon {
+  margin-right: 8px;
+}
+
+.sidebar-footer {
+  padding: 1em;
+}
+
+.input-box {
+  width: 250px;
+  margin-left: 5px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  background-color: #2a2a2a;
+}
+.mat-form-field .mat-form-field-placeholder {
+  color: white !important;
+}
+.add-category {
+  width: 100%;
+  padding: 0px 15px 0px 5px;}
+
+.input-box .mat-form-field-wrapper {
+  padding: 0 14px;
+}
+
+.menu-items {
+  flex-grow: 1;
+}
+
+.sidebar-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 10px;
+}
+.search-bar-wrapper {
+  width: 100%; 
+  padding: 0 16px;
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+
+.search-bar-design {
+  width: 90%; 
+  padding: 0;
+  margin: 0px;
+}
+.search-bar-design input {
+  color: #ffffff !important; 
+}
+
+.search-bar-design input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important; 
+}
+
+.search-bar-design .mat-icon {
+  color: rgba(255, 255, 255, 0.7) !important; 
+}
+
+.search-bar-design .mat-form-field-label {
+  left: 0;
+  position: absolute; 
+  transform: translateX(8px); 
+  color: rgba(255, 255, 255, 0.7) !important; 
+}
+
+::-webkit-scrollbar {
+  width: 6px; 
+  margin-left: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #333; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555; 
+  border-radius: 3px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}

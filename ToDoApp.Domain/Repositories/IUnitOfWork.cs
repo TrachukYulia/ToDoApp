@@ -11,5 +11,8 @@ namespace ToDoApp.Domain.Repositories
     {
         void Save();
         IBaseRepository<T> GetRepository<T>() where T : BaseEntity;
+        IUserRepository UsersRepository { get; }
+        ICategoryRepository CategoryRepository { get; }
+        IToDoItemRepository ToDoItemRepository { get; }
     }
 }

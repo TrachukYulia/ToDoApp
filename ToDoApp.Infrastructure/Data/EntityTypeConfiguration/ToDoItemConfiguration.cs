@@ -18,13 +18,11 @@ namespace ToDoApp.Infrastructure.Data.EntityTypeConfiguration
             builder.HasOne(x => x.Category)
              .WithMany(x => x.ToDoItems)
              .HasForeignKey(x => x.CategoryId)
-             .OnDelete(DeleteBehavior.Cascade);
+        .OnDelete(DeleteBehavior.Restrict); 
+          
             builder.Property(o => o.Name).IsRequired().HasMaxLength(999);
             builder.Property(o => o.IsDone).HasDefaultValue(false).IsRequired().HasMaxLength(999);
             builder.Property(o => o.DueDate).HasDefaultValue(DateTime.Now.Date).HasMaxLength(999);
-
-
-
         }
     }
 }

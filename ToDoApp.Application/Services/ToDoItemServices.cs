@@ -54,9 +54,9 @@ namespace ToDoApp.Application.Services
             return _mapper.Map<ToDoItemResponse>(toDoItem);
         }
 
-        public IEnumerable<ToDoItemResponse> GetAll()
+        public IEnumerable<ToDoItemResponse> GetAll(int userId)
         {
-            var toDoItems = _unitOfWork.GetRepository<ToDoItem>().GetAll();
+            var toDoItems = _unitOfWork.ToDoItemRepository.GetAllByUser(userId);
             if (toDoItems is null)
                 throw new NotFoundException(toDoItems);
             return _mapper.Map<IEnumerable<ToDoItemResponse>>(toDoItems);

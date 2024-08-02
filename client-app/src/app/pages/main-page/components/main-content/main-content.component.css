@@ -1,0 +1,178 @@
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  flex-direction: column;
+  background-color: #1a1a1a;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 0.5em; 
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 80px);
+  background-color: #1a1a1a;
+  overflow: hidden; 
+}
+
+/* Main Title */
+.main-title {
+  color: #ffcccb;
+  font-size: 1.5em; 
+}
+
+/* Description */
+.description {
+  color: #ccc;
+  margin-bottom: 0.5em; 
+}
+
+/* Task List Groups */
+.list-group, .completed-list-group {
+  flex: 1;
+  overflow-y: auto; 
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Task List Item */
+.list-group-item, .completed-list-group-item {
+  background-color: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+  margin-bottom: 0.4em;
+  padding: 0.5em; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.3s ease;
+  font-size: 0.9em; 
+}
+
+/* Hover Effect */
+.list-group-item:hover, .completed-list-group-item:hover {
+  background-color: #333;
+}
+
+/* Form Check Input */
+.form-check-input {
+  margin-right: 0.5em; 
+}
+
+/* Form Check Label */
+.form-check-label {
+  flex: 1;
+}
+
+/* Task Due Date */
+.task-due-date {
+  color: #999;
+  font-size: 0.8em; 
+  display: flex;
+  align-items: center;
+  margin-top: 0.3em; 
+}
+
+/* Calendar Icon */
+.calendar-icon {
+  margin-left: 2px;
+  font-size: 13px; 
+}
+
+/* Task Actions */
+.task-actions {
+  display: flex;
+  gap: 0.4em; 
+}
+
+/* Task Action Icons */
+.task-actions mat-icon {
+  cursor: pointer;
+  color: #ffcccb;
+  transition: color 0.3s ease;
+}
+
+.task-actions mat-icon:hover {
+  color: #fff;
+}
+
+/* Pagination */
+.pagination {
+  margin-top: 0.8em; 
+  display: flex;
+  justify-content: center;
+}
+
+mat-paginator {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+
+
+/* Completed Task */
+.completed-task {
+  text-decoration: line-through;
+  color: gray;
+  opacity: 0.7;
+}
+
+/* Completed Tasks Panel */
+.completed-tasks-panel {
+  margin-top: 16px; 
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+.completed-tasks-container {
+  max-height: 200px; 
+  overflow-y: auto; 
+}
+.completed-list-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.completed-list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.completed-task-label {
+  text-decoration: line-through;
+  color: gray; 
+}
+/* Completed Task Item */
+.completed-task-label {
+  text-decoration: line-through; 
+}
+.mat-expansion-panel-header .mat-expansion-panel-header-title {
+  color: #b9b9b9fb; 
+}
+::ng-deep .mat-expansion-panel-header .mat-icon {
+  color: #ffffff !important; 
+  font-size: 24px; 
+  transition: transform 0.3s ease; 
+}
+::ng-deep html
+{
+  --mat-expansion-header-indicator-color: rgb(255 255 255 / 54%) !important;
+  --mat-select-panel-background-color: white;
+  --mat-select-enabled-trigger-text-color: rgb(240 240 240 / 87%);
+  --mat-select-enabled-arrow-color: rgb(190 190 190 / 54%);
+  --mat-paginator-enabled-icon-color: rgb(195 195 195);
+  --mat-paginator-disabled-icon-color: rgb(255 255 255 / 23%);
+  --mdc-filled-text-field-input-text-color: rgb(253 253 253 / 87%);
+  --mat-form-field-state-layer-color: rgb(6 21 73 / 87%);
+}
+.mdc-text-field {
+background-color: #88888808;
+}

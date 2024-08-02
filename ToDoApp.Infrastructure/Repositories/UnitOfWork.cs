@@ -14,6 +14,9 @@ namespace ToDoApp.Infrastructure.Repositories
     {
         private Hashtable _repositories;
         private readonly ToDoAppContext _context;
+        private IUserRepository _userRepository;
+        private IToDoItemRepository _toDoItemRepository;
+        private ICategoryRepository _categoryRepository;
 
         public UnitOfWork(ToDoAppContext context)
         {
@@ -22,6 +25,10 @@ namespace ToDoApp.Infrastructure.Repositories
                 _repositories = new Hashtable();
 
         }
+        public IUserRepository UsersRepository => _userRepository ??= new UserRepository(_context);
+        public IToDoItemRepository ToDoItemRepository => _toDoItemRepository ??= new ToDoItemRepository(_context);
+        public ICategoryRepository CategoryRepository => _categoryRepository ??= new CategoryRepository(_context);
+
         public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : BaseEntity
         {
             var Type = typeof(TEntity).Name;

@@ -9,5 +9,6 @@ namespace ToDoApp.Domain.Repositories
 {
     public interface IToDoItemRepository : IBaseRepository<ToDoItem>
     {
+        public List<ToDoItem> GetAllByUser(int userId);
     }
 }

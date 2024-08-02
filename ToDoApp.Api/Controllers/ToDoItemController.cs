@@ -16,9 +16,9 @@ namespace ToDoApp.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ToDoItemResponse>> GetAll()
+        public ActionResult<IEnumerable<ToDoItemResponse>> GetAll([FromQuery] int userId)
         {
-            IEnumerable<ToDoItemResponse> toDoItemResponses = _toDoItemServices.GetAll();
+            IEnumerable<ToDoItemResponse> toDoItemResponses = _toDoItemServices.GetAll(userId);
             return Ok(toDoItemResponses);
         }
 

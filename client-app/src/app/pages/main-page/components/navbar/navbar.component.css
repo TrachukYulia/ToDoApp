@@ -1,0 +1,44 @@
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(19, 18, 18);
+    color: white;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .username {
+    margin-right: 16px;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+  }
+  
+  .logout-button {
+    margin-left: 15px;
+    margin-right: 5px;
+
+    display: flex;
+    align-items: center;
+    color: white;
+    border-radius: 2px;
+    border: 1px solid #2b2b2b00 !important;
+    background-color: #58585800;
+  }
+  
+  .logout-button mat-icon {
+    margin-right: 8px;
+  }
+  
+  .logout-button:hover {
+    background-color: #bcbcbc7c; 
+    border-color:#0e599bbe ;
+  }

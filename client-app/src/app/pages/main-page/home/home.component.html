@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened class="sidebar">
+    <app-sidebar
+      (categorySelected)="onCategorySelected($event)">
+    </app-sidebar>
+  </mat-sidenav>
+  
+  <mat-sidenav-content class="sidenav-content">
+    <div class="content-wrapper">
+      <app-main-content></app-main-content>
+      <app-footer></app-footer>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
