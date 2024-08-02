@@ -11,7 +11,6 @@ namespace ToDoApp.Application.Interfaces
     {
         IEnumerable<CategoryResponse> GetAll(int userId);
         void Create(CategoryRequest categoryRequest);
-        CategoryResponse Get(int id);
         void Update(CategoryRequest categoryRequest, int id);
         void Delete(int id);
     }

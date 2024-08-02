@@ -9,6 +9,7 @@ using ToDoApp.Application.DTO;
 using ToDoApp.Application.Interfaces;
 using ToDoApp.Domain.Models;
 using ToDoApp.Domain.Repositories;
+using ToDoApp.Application.Exceptions;
 
 namespace ToDoApp.Application.Services
 {
@@ -56,6 +57,7 @@ namespace ToDoApp.Application.Services
                 return (null, null);
             var token = _jwtService.GenerateToken(user);
             var refreshToken = _jwtService.GenerateRefreshToken();
+            user.Token = token;
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
             _unitOfWork.UsersRepository.Update(user);
@@ -95,6 +97,17 @@ namespace ToDoApp.Application.Services
                 _unitOfWork.UsersRepository.Update(user);
                 _unitOfWork.Save();
             }
+        }
+        public string UsernameById(int id)
+        {
+            var user = _unitOfWork.GetRepository<User>().Get(id);
+
+            if (user == null)
+            {
+                throw new NotFoundException(user);
+            }
+
+            return user.Username;
         }
     }
 }

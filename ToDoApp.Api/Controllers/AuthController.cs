@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using ToDoApp.Application.DTO;
 using ToDoApp.Application.Interfaces;
+using ToDoApp.Application.Services;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -46,6 +50,42 @@ public class AuthController : ControllerBase
     {
         _userService.RevokeToken(model.RefreshToken);
         return NoContent();
+    }
+    [HttpGet("userid")]
+    [Authorize]
+    public IActionResult GetUserId()
+    {
+        var token = Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+        if (token != null)
+        {
+            var jwtToken = new JwtSecurityTokenHandler().ReadJwtToken(token);
+            var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
+
+            if (userId != null)
+            {
+                return Ok(new { userId = int.Parse(userId) });
+            }
+        }
+
+        return Unauthorized();
+    }
+    [HttpGet("username")]
+    [Authorize]
+    public IActionResult GetUsernameByid()
+    {
+        var token = Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+        if (token != null)
+        {
+            var jwtToken = new JwtSecurityTokenHandler().ReadJwtToken(token);
+            var username = jwtToken.Claims.FirstOrDefault(c => c.Type == "unique_name")?.Value;
+
+            if (username != null)
+            {
+                return Ok(new { username });
+            }
+        }
+
+        return Unauthorized();
     }
 }
 

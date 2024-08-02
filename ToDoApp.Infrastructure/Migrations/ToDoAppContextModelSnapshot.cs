@@ -71,7 +71,7 @@ namespace ToDoApp.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(999)
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 8, 1, 0, 0, 0, 0, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2024, 8, 2, 0, 0, 0, 0, DateTimeKind.Local));
 
                     b.Property<bool>("IsDone")
                         .ValueGeneratedOnAdd()
@@ -118,6 +118,9 @@ namespace ToDoApp.Infrastructure.Migrations
 
                     b.Property<DateTime>("RefreshTokenExpiryTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
                         .IsRequired()

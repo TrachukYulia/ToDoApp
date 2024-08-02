@@ -41,17 +41,6 @@ namespace ToDoApp.Application.Services
             _unitOfWork.Save();
         }
 
-        public CategoryResponse Get(int id)
-        {
-            var category = _unitOfWork.GetRepository<ToDoItem>().Get(id);
-
-            if (category == null)
-            {
-                throw new NotFoundException(category);
-            }
-
-            return _mapper.Map<CategoryResponse>(category);
-        }
 
         public IEnumerable<CategoryResponse> GetAll(int userId)
         {

@@ -12,7 +12,7 @@ using ToDoApp.Infrastructure.Data;
 namespace ToDoApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ToDoAppContext))]
-    [Migration("20240731232659_Init")]
+    [Migration("20240801220146_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -74,7 +74,7 @@ namespace ToDoApp.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(999)
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 8, 1, 0, 0, 0, 0, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2024, 8, 2, 0, 0, 0, 0, DateTimeKind.Local));
 
                     b.Property<bool>("IsDone")
                         .ValueGeneratedOnAdd()
@@ -121,6 +121,9 @@ namespace ToDoApp.Infrastructure.Migrations
 
                     b.Property<DateTime>("RefreshTokenExpiryTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
                         .IsRequired()

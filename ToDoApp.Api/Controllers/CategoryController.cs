@@ -34,14 +34,6 @@ namespace ToDoApp.Api.Controllers
             return Ok();
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<CategoryResponse> GetCategoryById(int id)
-        {
-            var categoryResponse = _categoryService.Get(id);
-
-            return Ok(categoryResponse);
-        }
-
         [HttpPut("{id}")]
         public ActionResult UpdateCategory(int id, [FromBody] CategoryRequest categoryRequest)
         {

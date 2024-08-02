@@ -20,6 +20,7 @@ namespace ToDoApp.Infrastructure.Migrations
                     Username = table.Column<string>(type: "nvarchar(999)", maxLength: 999, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RefreshTokenExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -58,7 +59,7 @@ namespace ToDoApp.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(999)", maxLength: 999, nullable: false),
                     IsDone = table.Column<bool>(type: "bit", maxLength: 999, nullable: false, defaultValue: false),
-                    DueDate = table.Column<DateTime>(type: "datetime2", maxLength: 999, nullable: false, defaultValue: new DateTime(2024, 8, 1, 0, 0, 0, 0, DateTimeKind.Local)),
+                    DueDate = table.Column<DateTime>(type: "datetime2", maxLength: 999, nullable: false, defaultValue: new DateTime(2024, 8, 2, 0, 0, 0, 0, DateTimeKind.Local)),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },

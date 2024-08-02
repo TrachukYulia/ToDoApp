@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
@@ -21,11 +21,10 @@ addCategory(model: CategoryRequestModel): Observable<void>
  {
    return this.http.post<void>('https://localhost:7085/api/Category', model)
  }
-getCategory(): Observable<any> {
-  return this.http.get('https://localhost:7085/api/Category');
-}
-getById( id: number): Observable<any> {
-  return this.http.get('https://localhost:7085/api/Category/'+id);
+getCategory(userId: number): Observable<any> {
+  return this.http.get(`https://localhost:7085/api/Category/`, {
+    params: new HttpParams().set('userId', userId.toString())
+  });
 }
 updateCategory( id: number, categoryData: any): Observable<any> {
   return this.http.put('https://localhost:7085/api/Category/'+id, categoryData);

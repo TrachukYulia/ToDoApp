@@ -40,7 +40,9 @@
 }
 
 .divider {
-  border-top-color: rgba(111, 111, 111, 0.386);
+  border: 2px;
+  color: aliceblue;
+  border-color: rgba(213, 213, 213, 0.386);
   border-width: 3px;
 }
 
@@ -125,7 +127,6 @@
   color: rgba(255, 255, 255, 0.7) !important; 
 }
 
-/* Custom scrollbar for WebKit browsers */
 ::-webkit-scrollbar {
   width: 6px; 
   margin-left: 5px;

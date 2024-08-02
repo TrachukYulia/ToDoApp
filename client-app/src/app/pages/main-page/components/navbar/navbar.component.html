@@ -1,0 +1,12 @@
+<mat-toolbar class="toolbar">
+    <span>My To-Do App</span>
+    <span class="spacer"></span>
+    <div *ngIf="username" class="user-info">
+      <span class="username">{{ username }}</span>
+      <button mat-button (click)="logout()" class="logout-button">
+        <mat-icon>exit_to_app</mat-icon>
+        Logout
+      </button>
+    </div>
+  </mat-toolbar>
+  
