@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, tap } from 'rxjs';
 import { ToDoItem } from '../models/to-do-item/to-do-item.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Category } from '../models/category/category.model';
@@ -19,20 +19,33 @@ export class TaskService {
   selectedCategory$ = this.selectedCategorySubject.asObservable();
   private userId: any;
 
+  // constructor(private http: HttpClient, private authService: AuthService) {
+  //   this.authService.getUserId().subscribe(userId => {
+  //     if (userId) {
+  //       this.fetchTasks(this.userId);
+  //       this.selectedCategory$.subscribe(category => {
+  //         if (category) {
+  //           this.filterTasksByCategory(this.userId, category.id);
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
+
   constructor(private http: HttpClient, private authService: AuthService) {
     this.authService.getUserId().subscribe(userId => {
       if (userId) {
-        this.fetchTasks(this.userId);
-        this.selectedCategory$.subscribe(category => {
-          if (category) {
-            this.filterTasksByCategory(this.userId, category.id);
-          }
-        });
+        this.setUserId(userId);
+        this.fetchTasks(userId);
+      }
+    });
+
+    combineLatest([this.userId$, this.selectedCategory$]).subscribe(([userId, category]) => {
+      if (userId && category) {
+        this.filterTasksByCategory(userId, category.id);
       }
     });
   }
-
-  
   addToDoItem(task: ToDoItem): Observable<void> {
     return this.http.post<void>('https://localhost:7085/api/ToDoItem', task).pipe(
       tap(() => {

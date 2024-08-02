@@ -138,7 +138,7 @@ export class MainContentComponent implements OnInit {
   editTask(task: any) {
     console.log(task)
     const dialogRef = this.dialog.open(EditToDoItemComponent, {
-      data: { id: task.id, name: task.name, date: task.dueDate, isDone: task.isDone },
+      data: { id: task.id, name: task.name, dueDate: task.dueDate, isDone: task.isDone },
     });
     dialogRef.afterClosed().subscribe({
       next: (val) => {
