@@ -106,9 +106,7 @@ export class MainContentComponent implements OnInit {
   getTodoItems(): void {
     this._taskService.tasks$.subscribe(tasks => {
       this.tasks = tasks.filter(task => !task.isDone);
-      this.selectedCategoryName = this.category
-        .filter(category => category.id === this.selectedCategoryId)
-        .map(category => category.name)[0];
+  
       this.updatePaginatedTasks();
     });
   }
@@ -138,7 +136,7 @@ export class MainContentComponent implements OnInit {
   editTask(task: any) {
     console.log(task)
     const dialogRef = this.dialog.open(EditToDoItemComponent, {
-      data: { id: task.id, name: task.name, date: task.dueDate, isDone: task.isDone },
+      data: { id: task.id, name: task.name, dueDate: task.dueDate, isDone: task.isDone },
     });
     dialogRef.afterClosed().subscribe({
       next: (val) => {
