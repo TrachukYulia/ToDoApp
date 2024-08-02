@@ -106,9 +106,7 @@ export class MainContentComponent implements OnInit {
   getTodoItems(): void {
     this._taskService.tasks$.subscribe(tasks => {
       this.tasks = tasks.filter(task => !task.isDone);
-      // this.selectedCategoryName = this.category
-      //   .filter(category => category.id === this.selectedCategoryId)
-      //   .map(category => category.name)[0];
+  
       this.updatePaginatedTasks();
     });
   }
