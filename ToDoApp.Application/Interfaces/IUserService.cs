@@ -13,6 +13,5 @@ namespace ToDoApp.Application.Interfaces
         (string, string) Login(LoginRequest model);
         (string, string) RefreshToken(TokenDTO model);
         void RevokeToken(string refreshToken);
-        string UsernameById(int id);
     }
 }

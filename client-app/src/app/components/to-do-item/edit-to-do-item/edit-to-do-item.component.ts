@@ -51,17 +51,13 @@ export class EditToDoItemComponent implements OnInit {
   }
 
   onFormSubmit(): void {
-    console.log('Form values before submit:', this.editTaskForm.value); 
     if (this.editTaskForm.valid) {
       const updatedTaskData: ToDoItem = {
         ...this.editTaskForm.value,
         dueDate: this.formatDate(this.editTaskForm.value.dueDate)
       };
-      console.log('Form updatedTaskData before submit:', updatedTaskData); 
-
       this._taskService.updateToDoItem(this.data.id, updatedTaskData).subscribe({
         next: (val: any) => {
-          console.log('Update!', val); 
           this._snackbarService.openSnackBar('Task updated successfully!');
           this.dialogRef.close(true);
         },

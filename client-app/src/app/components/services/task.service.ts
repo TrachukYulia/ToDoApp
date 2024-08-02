@@ -18,20 +18,6 @@ export class TaskService {
   private selectedCategorySubject = new BehaviorSubject<Category | null>(null);
   selectedCategory$ = this.selectedCategorySubject.asObservable();
   private userId: any;
-
-  // constructor(private http: HttpClient, private authService: AuthService) {
-  //   this.authService.getUserId().subscribe(userId => {
-  //     if (userId) {
-  //       this.fetchTasks(this.userId);
-  //       this.selectedCategory$.subscribe(category => {
-  //         if (category) {
-  //           this.filterTasksByCategory(this.userId, category.id);
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
-
   constructor(private http: HttpClient, private authService: AuthService) {
     this.authService.getUserId().subscribe(userId => {
       if (userId) {

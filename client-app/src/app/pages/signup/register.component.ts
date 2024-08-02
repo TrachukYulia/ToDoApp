@@ -16,7 +16,13 @@ export class RegisterComponent {
   email!: string;
   password!: string;
   errorMessage!: string;
+  isPasswordVisible: boolean = false;
+  eyeIcon: string = 'fa-eye-slash'; 
 
+  hideShowPass() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+    this.eyeIcon = this.isPasswordVisible ? 'fa-eye' : 'fa-eye-slash';
+  }
   constructor(private _authService: AuthService, private router: Router) {}
 
   register(): void {
@@ -27,7 +33,7 @@ export class RegisterComponent {
         this.router.navigate(['/login']);
       },
       error: (error) => {
-        this.errorMessage = 'Registration failed';
+        this.errorMessage = 'All fields are required.';
       }
     });
   }

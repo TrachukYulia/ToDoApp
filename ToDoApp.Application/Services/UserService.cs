@@ -98,16 +98,5 @@ namespace ToDoApp.Application.Services
                 _unitOfWork.Save();
             }
         }
-        public string UsernameById(int id)
-        {
-            var user = _unitOfWork.GetRepository<User>().Get(id);
-
-            if (user == null)
-            {
-                throw new NotFoundException(user);
-            }
-
-            return user.Username;
-        }
     }
 }

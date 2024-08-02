@@ -15,13 +15,13 @@ export class LoginComponent {
   username: string ='';
   password: string ='';
   errorMessage!: string;
-
+  isPasswordVisible: boolean = false;
+  eyeIcon: string = 'fa-eye-slash';
   constructor(private _authService: AuthService,
               private _taskService: TaskService,
               private router: Router) {
 
   }
-
   login(): void {
     this._authService.login(this.username, this.password).subscribe({
       next: () => {
