@@ -5,7 +5,7 @@ This project is a comprehensive to-do list application built using Angular for t
 ## Features
 
 ### 1. Task Management
-- **Create Tasks:** Users can add new tasks with detailed information such as title, description, due dates, and categories.
+- **Create Tasks:** Users can add new tasks.
 - **View Tasks:** Display all tasks with sorting and filtering options.
 - **Edit Tasks:** Modify task details easily through an intuitive UI.
 - **Delete Tasks:** Remove tasks that are completed or no longer needed.
