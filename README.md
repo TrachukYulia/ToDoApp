@@ -27,7 +27,7 @@ This project is a comprehensive to-do list application built using Angular for t
 - **Filter by Categories:** Advanced filtering options to view tasks based on selected categories.
 
 ### 6. Video Explanation
-For a detailed explanation of the project, including how to set it up and an overview of the codebase, check out [this video](https://example.com/video-link).
+For a detailed explanation of the project, including how to set it up and an overview of the codebase, check out [this video](https://youtu.be/quQSH5Lb-L4?si=xR0_sLZzMSbaXcSk).
 
 ## Technologies Used
 
