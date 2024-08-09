@@ -1,4 +1,4 @@
-# To-Do Application
+# To-Do Web Application
 
 This project is a comprehensive to-do list application built using Angular for the front-end, ASP.NET Core for the back-end, and SQL Server for database management. It offers a robust set of features, including task and category management, user authentication with refresh tokens, pagination, and advanced searching and filtering. 
 
